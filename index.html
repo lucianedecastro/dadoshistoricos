@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desempenho dos Técnicos da Seleção Feminina</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <header>
+        <h1>Desempenho dos Técnicos da Seleção Feminina</h1> 
+    </header>
+
+    <div id="filtros">
+        <label for="filtroAno">Ano:</label>
+        <select id="filtroAno">
+            <option value="">Selecione um Ano</option> 
+        </select>
+    </div>
+
+    <div id="conteudo-abas">
+        <div id="geral-conteudo" class="aba-conteudo">
+            <h2>Geral</h2>
+            <div id="tabelaGeral"></div>
+        </div>
+        <div id="desempenho-conteudo" class="aba-conteudo">
+            <h2>Desempenho</h2>
+            <div id="tabelaDesempenho"></div>
+        </div>
+        <div id="detalhado-conteudo" class="aba-conteudo">
+            <h2>Detalhado</h2>
+            <div id="tabelaDetalhado"></div>
+        </div>
+    </div>
+    <script src="script.js"></script> 
+</body>
+</html>
