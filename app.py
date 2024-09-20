@@ -1,44 +1,53 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import pymongo
-import os
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 app = Flask(__name__)
 CORS(app)
 
-# String de conexão do MongoDB Atlas (obtida da variável de ambiente)
-mongodb_uri = os.environ.get("MONGODB_URI")
+# Credenciais da API do Google (ajuste o caminho para o arquivo JSON)
+scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+creds = ServiceAccountCredentials.from_json_keyfile_name(r'C:\Users\lucia\desempenhotecnicosV2\disco-freedom-433500-h0-d619a1073895.json', scope) 
+client = gspread.authorize(creds)
 
-# Conectar ao MongoDB Atlas
-client = pymongo.MongoClient(mongodb_uri)
-db = client.get_database("dadoshistoricos") # Substitua pelo nome do seu banco de dados
+# Link da Planilha no Google Drive (substitua pelo seu link)
+spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1qsUHg92SYqbpufM9nTIZuBhkNHmgM-uL/edit?usp=drive_link&ouid=111070395629463126436&rtpof=true&sd=true'
 
-# Rota para buscar dados de todas as abas, filtrando por ano
-@app.route('/api/dados/<int:ano>')
-def api_dados(ano):
-    # Buscar dados da collection "geral"
-    geral = list(db["geral"].find({"Ano": ano}))
+# Abrir a Planilha
+spreadsheet = client.open_by_url(spreadsheet_url)
 
-    # Buscar dados da collection "desempenho"
-    desempenho = list(db["desempenho"].find({
-        "$or": [
-            {"Ano_1": ano},
-            {"Ano_2": ano},
-            {"Ano_3": ano},
-            {"Ano_4": ano}
-        ]
-    }))
+# Função para ler os dados de uma aba
+def ler_dados_da_aba(aba_nome):
+    worksheet = spreadsheet.worksheet(aba_nome)
+    dados = worksheet.get_all_records()
+    return dados
 
-    # Buscar dados da collection "detalhado", filtrando por "Jogos" diferente de zero
-    detalhado = list(db["detalhado"].find({"Ano": ano, "Jogos": {"$ne": 0}}))
+# Rota /api/geral
+@app.route('/api/geral')
+def api_geral():
+    ano = request.args.get('ano')
+    dados = ler_dados_da_aba('Geral')
+    if ano:
+        dados = [d for d in dados if d['Ano'] == int(ano)]
+    return jsonify(dados)
 
-    # Combinar os dados das três collections
-    dados = {
-        "geral": geral,
-        "desempenho": desempenho,
-        "detalhado": detalhado
-    }
+# Rota /api/desempenho
+@app.route('/api/desempenho')
+def api_desempenho():
+    ano = request.args.get('ano')
+    dados = ler_dados_da_aba('Desempenho')
+    if ano:
+        dados = [d for d in dados if any(str(d.get(f'Ano_{i}')) == ano for i in range(1, 5))]
+    return jsonify(dados)
 
+# Rota /api/detalhado
+@app.route('/api/detalhado')
+def api_detalhado():
+    ano = request.args.get('ano')
+    dados = ler_dados_da_aba('Detalhado')
+    if ano:
+        dados = [d for d in dados if d['Ano'] == int(ano) and int(d.get('Jogos', 0)) != 0]
     return jsonify(dados)
 
 if __name__ == '__main__':

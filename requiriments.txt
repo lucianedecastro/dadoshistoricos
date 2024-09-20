@@ -1,3 +1,4 @@
 Flask
 Flask-CORS
-pymongo
+gspread
+oauth2client
