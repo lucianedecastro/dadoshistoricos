@@ -1,8 +1,8 @@
 import openpyxl
 import json
 
-# Carrega a pasta de trabalho do Excel
-workbook = openpyxl.load_workbook('Desempenho dos técnicos da seleção.xlsx')
+# Carrega a pasta de trabalho do Excel com fórmulas avaliadas
+workbook = openpyxl.load_workbook('Desempenho dos técnicos da seleção.xlsx', data_only=True)
 
 # Cria o objeto dadosSelecao
 dadosSelecao = {
