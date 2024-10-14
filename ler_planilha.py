@@ -9,11 +9,10 @@ def linha_para_dicionario(sheet, linha):
         valor_celula = sheet.cell(row=linha, column=coluna).value
 
         # Ajusta para tratar os valores no JSON
-        if valor_celula is not None: 
-            if isinstance(valor_celula, int):  # Corrige os anos na aba "detalhado"
-                valor_celula = str(valor_celula)
-            elif isinstance(valor_celula, (float, int)):
-                valor_celula = str(valor_celula).replace(" ", "")  # Remove espaços extras
+        if valor_celula is not None:
+            # Para anos ou valores numéricos, manter como está, exceto por espaços extras
+            if isinstance(valor_celula, (int, float)):
+                valor_celula = str(valor_celula).replace(" ", "")
             elif isinstance(valor_celula, str):
                 valor_celula = valor_celula.strip()  # Remove espaços no início e no fim
 
@@ -46,10 +45,18 @@ sheet_geral = workbook['Geral']
 for linha in range(2, sheet_geral.max_row + 1):
     dadosSelecao["geral"].append(linha_para_dicionario(sheet_geral, linha))
 
-# Lê os dados da guia "Desempenho"
+# Lê os dados da guia "Desempenho", incluindo as colunas Adversárias e Top5
 sheet_desempenho = workbook['Desempenho']
 for linha in range(2, sheet_desempenho.max_row + 1):
-    dadosSelecao["desempenho"].append(linha_para_dicionario(sheet_desempenho, linha))
+    dados = linha_para_dicionario(sheet_desempenho, linha)
+    
+    # Verifica se as colunas Adversárias e Top5 estão presentes
+    if "Adversárias" not in dados:
+        dados["Adversárias"] = 0  # Valor padrão se a coluna não existir
+    if "Top5" not in dados:
+        dados["Top5"] = 0  # Valor padrão se a coluna não existir
+
+    dadosSelecao["desempenho"].append(dados)
 
 # Imprime os dados em formato JSON para um arquivo
 try:
@@ -58,3 +65,4 @@ try:
     print("Dados exportados para dados.json com sucesso!")
 except Exception as e:
     print(f"Erro ao salvar o arquivo JSON: {e}")
+

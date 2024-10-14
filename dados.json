@@ -110,7 +110,7 @@
             "Competição": "Olimpíadas",
             "Resultado": "Vice-campeã",
             "Técnico": "Jorge Barcelos",
-            "Seleções adversárias": "Alemanha, Nigéria, Coreia, Noruega e EUA"
+            "Seleções adversárias": "Alemanha, Nigéria, Coréia, Noruega e EUA"
         },
         {
             "Ano": "2010",
@@ -183,137 +183,177 @@
             "Seleções adversárias": "Italia, Australia, Jamaica, França"
         },
         {
-            "Ano": "2020", 
-            "Competição": "Jogos Pan-Americanos", 
-            "Resultado": "Campeã", 
-            "Técnico": "Pia Sundhage", 
-            "Seleções adversárias": "Venezuela, Equador, México"
-        }, 
-        { 
-            "Ano": "2021", 
-            "Competição": "Olimpíadas", 
-            "Resultado": "Quartas de final", 
-            "Técnico": "Pia Sundhage", 
-            "Seleções adversárias": "Reino Unido, Japão, Canadá, Suécia"
-        }, 
-        { 
-            "Ano": "2022", 
-            "Competição": "Copa América", 
-            "Resultado": "Vice-campeã", 
-            "Técnico": "Pia Sundhage", 
-            "Seleções adversárias": "Colômbia, Argentina, Paraguai, Chile, Uruguai"
-        } 
-        ], 
-        "desempenho": [ 
-        { 
-            "Técnico": "Fernando Pires", 
-            "Jogos": 4, 
-            "Vitórias": 2, 
-            "Empates": 0, 
-            "Derrotas": 2, 
-            "Ano_1": 1991, 
-            "Ano_2": 1995, 
-            "Ano_3": 1999, 
-            "Ano_4": 2003
-        }, 
-        { 
-            "Técnico": "Ademar Fonseca", 
-            "Jogos": 4, 
-            "Vitórias": 2, 
-            "Empates": 0, 
-            "Derrotas": 2, 
-            "Ano_1": 1995, 
-            "Ano_2": 1999, 
-            "Ano_3": 2003, 
-            "Ano_4": 2004
-        }, 
-        { 
-            "Técnico": "Zé Duarte", 
-            "Jogos": 6, 
-            "Vitórias": 2, 
-            "Empates": 1, 
-            "Derrotas": 3, 
-            "Ano_1": 1996, 
-            "Ano_2": 1998, 
-            "Ano_3": 2000, 
-            "Ano_4": 2008
-        }, 
-        { 
-            "Técnico": "Wilson de Oliveira", 
-            "Jogos": 6, 
-            "Vitórias": 4, 
-            "Empates": 1, 
-            "Derrotas": 1, 
-            "Ano_1": 1999, 
-            "Ano_2": 2003, 
-            "Ano_3": 2004, 
-            "Ano_4": 2007
-        }, 
-        { 
+            "Ano": "2021",
+            "Competição": "Olimpíadas",
+            "Resultado": "Quartas de final",
+            "Técnico": "Pia Sundhage",
+            "Seleções adversárias": "Holanda, Zâmbia, China, Canadá"
+        },
+        {
+            "Ano": "2022",
+            "Competição": "Copa América",
+            "Resultado": "Campeã",
+            "Técnico": "Pia Sundhage",
+            "Seleções adversárias": "Colombia, Paraguai, Uruguai, Argentina, Venezuela, Peru"
+        },
+        {
+            "Ano": "2023",
+            "Competição": "Copa do Mundo",
+            "Resultado": "Fase de Grupos",
+            "Técnico": "Pia Sundhage",
+            "Seleções adversárias": "França, Jamaica, Panama"
+        },
+        {
+            "Ano": "2024",
+            "Competição": "Olimpíadas",
+            "Resultado": "Vice-campeã",
+            "Técnico": "Arthur Elias",
+            "Seleções adversárias": "Espanha, Japão, Nigéria, França, EUA"
+        }
+    ],
+    "desempenho": [
+        {
+            "Técnico": "Fernando Pires",
+            "Ano_1": "1991",
+            "Ano_2": "1991",
+            "Ano_3": "1991",
+            "Ano_4": "1991",
+            "Jogos ": "5",
+            "Vitória": "3",
+            "Derrotas": "2",
+            "Empates": "0",
+            "Adversárias": "5",
+            "Top5": "2"
+        },
+        {
+            "Técnico": "Ademar Fonseca",
+            "Ano_1": "1995",
+            "Ano_2": "1995",
+            "Ano_3": "1995",
+            "Ano_4": "1995",
+            "Jogos ": "8",
+            "Vitória": "6",
+            "Derrotas": "2",
+            "Empates": "0",
+            "Adversárias": "7",
+            "Top5": "2"
+        },
+        {
+            "Técnico": "Zé Duarte",
+            "Ano_1": "1996",
+            "Ano_2": "1998",
+            "Ano_3": "2000",
+            "Ano_4": "2000",
+            "Jogos ": "15",
+            "Vitória": "9",
+            "Derrotas": "4",
+            "Empates": "2",
+            "Adversárias": "13",
+            "Top5": "4"
+        },
+        {
             "Técnico": "Paulo Gonçalves",
-            "Jogos": 8, 
-            "Vitórias": 6, 
-            "Empates": 1, 
-            "Derrotas": 1, 
-            "Ano_1": 2003, 
-            "Ano_2": 2004, 
-            "Ano_3": 2006, 
-            "Ano_4": 2007
-        }, 
-        { 
-            "Técnico": "Jorge Barcelos", 
-            "Jogos": 8, 
-            "Vitórias": 5, 
-            "Empates": 1, 
-            "Derrotas": 2, 
-            "Ano_1": 2006, 
-            "Ano_2": 2007, 
-            "Ano_3": 2008, 
-            "Ano_4": 2009
-        }, 
-        { 
-            "Técnico": "Kleiton Lima", 
-            "Jogos": 8, 
-            "Vitórias": 5, 
-            "Empates": 1, 
-            "Derrotas": 2, 
-            "Ano_1": 2010, 
-            "Ano_2": 2011, 
-            "Ano_3": 2011, 
-            "Ano_4": 2012
+            "Ano_1": "2003",
+            "Ano_2": "2003",
+            "Ano_3": "2003",
+            "Ano_4": "2003",
+            "Jogos ": "10",
+            "Vitória": "8",
+            "Derrotas": "1",
+            "Empates": "1",
+            "Adversárias": "10",
+            "Top5": "1"
         },
-        { 
-            "Técnico": "Vadão", 
-            "Jogos": 10, 
-            "Vitórias": 6, 
-            "Empates": 1, 
-            "Derrotas": 3, 
-            "Ano_1": 2014, 
-            "Ano_2": 2015, 
-            "Ano_3": 2016, 
-            "Ano_4": 2018
-        }, 
-        { 
-            "Técnico": "Pia Sundhage", 
-            "Jogos": 8, 
-            "Vitórias": 5, 
-            "Empates": 2, 
-            "Derrotas": 1, 
-            "Ano_1": 2019, 
-            "Ano_2": 2021, 
-            "Ano_3": 2022, 
-            "Ano_4": 2023 
+        {
+            "Técnico": "Wilson Oliveira",
+            "Ano_1": "1999",
+            "Ano_2": "1999",
+            "Ano_3": "1999",
+            "Ano_4": "1999",
+            "Jogos ": "6",
+            "Vitória": "4",
+            "Derrotas": "1",
+            "Empates": "1",
+            "Adversárias": "6",
+            "Top5": "2"
         },
-        { 
-            "Técnico": "Arthur Elias", 
-            "Jogos": 6, 
-            "Vitórias": 3, 
-            "Empates": 2, 
-            "Derrotas": 3, 
-            "Ano_1": 2024, 
-            "Ano_2": 2024, 
-            "Ano_3": 2024, 
-            "Ano_4": 2024 
-        }       
-
-        ] }
+        {
+            "Técnico": "René Simões",
+            "Ano_1": "2004",
+            "Ano_2": "2004",
+            "Ano_3": "2004",
+            "Ano_4": "2004",
+            "Jogos ": "6",
+            "Vitória": "4",
+            "Derrotas": "2",
+            "Empates": "0",
+            "Adversárias": "5",
+            "Top5": "2"
+        },
+        {
+            "Técnico": "Jorge Barcelos",
+            "Ano_1": "2006",
+            "Ano_2": "2007",
+            "Ano_3": "2008",
+            "Ano_4": "2012",
+            "Jogos ": "28",
+            "Vitória": "22",
+            "Derrotas": "5",
+            "Empates": "1",
+            "Adversárias": "22",
+            "Top5": "4"
+        },
+        {
+            "Técnico": "Kleiton Lima",
+            "Ano_1": "2010",
+            "Ano_2": "2011",
+            "Ano_3": "2001",
+            "Ano_4": "2011",
+            "Jogos ": "16",
+            "Vitória": "13",
+            "Derrotas": "0",
+            "Empates": "3",
+            "Adversárias": "13",
+            "Top5": "2"
+        },
+        {
+            "Técnico": "Vadão",
+            "Ano_1": "2014",
+            "Ano_2": "2015",
+            "Ano_3": "2016",
+            "Ano_4": "2018",
+            "Jogos ": "29",
+            "Vitória": "23",
+            "Derrotas": "3",
+            "Empates": "3",
+            "Adversárias": "15",
+            "Top5": "1"
+        },
+        {
+            "Técnico": "Pia",
+            "Ano_1": "2019",
+            "Ano_2": "2021",
+            "Ano_3": "2022",
+            "Ano_4": "2023",
+            "Jogos ": "17",
+            "Vitória": "11",
+            "Derrotas": "4",
+            "Empates": "2",
+            "Adversárias": "15",
+            "Top5": "3"
+        },
+        {
+            "Técnico": "Arthur",
+            "Ano_1": "2024",
+            "Ano_2": "2024",
+            "Ano_3": "2024",
+            "Ano_4": "2024",
+            "Jogos ": "6",
+            "Vitória": "3",
+            "Derrotas": "3",
+            "Empates": "0",
+            "Adversárias": "5",
+            "Top5": "3"
+        }
+    ]
+}

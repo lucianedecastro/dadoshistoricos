@@ -92,8 +92,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function atualizarGrafico() {
         const anoSelecionado = filtroAno.value;
 
-        // Filtra os dados de desempenho pelo ano selecionado
-        const dadosDesempenhoFiltrados = dadosSelecao.desempenho.filter(entry => entry.Ano_1 == anoSelecionado);
+        // Filtra os dados de desempenho verificando múltiplos campos de ano
+        const dadosDesempenhoFiltrados = dadosSelecao.desempenho.filter(entry => 
+            entry.Ano_1 == anoSelecionado || 
+            entry.Ano_2 == anoSelecionado || 
+            entry.Ano_3 == anoSelecionado || 
+            entry.Ano_4 == anoSelecionado
+        );
 
         if (dadosDesempenhoFiltrados.length === 0) {
             graficoContainer.innerHTML = '<p>Nenhum dado de desempenho disponível para o ano selecionado.</p>';
@@ -103,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Prepara os dados para o gráfico
         const labels = ['Vitórias', 'Derrotas', 'Empates'];
         const dadosGrafico = [
-            dadosDesempenhoFiltrados[0].Vitória,
+            dadosDesempenhoFiltrados[0].Vitórias,
             dadosDesempenhoFiltrados[0].Derrotas,
             dadosDesempenhoFiltrados[0].Empates
         ];
