@@ -95,37 +95,3 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
-    }
-
-    function atualizarTabela() {
-        const dadosGeral = filtrarDados('geral');
-        const dadosDesempenho = filtrarDados('desempenho');
-        const dadosDetalhado = filtrarDados('detalhado').filter(item => item.Jogos !== 0);
-
-        const dadosFiltrados = [...dadosGeral, ...dadosDesempenho, ...dadosDetalhado];
-
-        if (dadosFiltrados.length > 0) {
-            criarCabecalhoTabela(Object.keys(dadosFiltrados[0] || {}));
-            criarLinhasTabela(dadosFiltrados);
-            tabelaContainer.style.display = 'block';
-
-            // Gera o gráfico apenas para a aba "detalhado"
-            if (dadosDetalhado.length > 0) {
-                gerarGrafico(dadosDetalhado);
-                graficoContainer.style.display = 'block'; 
-            } else {
-                graficoContainer.style.display = 'none';
-            }
-        } else {
-            tabelaContainer.style.display = 'none';
-            graficoContainer.style.display = 'none';
-        }
-    }
-
-    // Carrega os dados e preenche os filtros
-    carregarDados();
-
-    // Adiciona ouvintes de eventos aos filtros
-    filtroAno.addEventListener('change', atualizarTabela);
-    filtroCompeticao.addEventListener('change', atualizarTabela);
-});
