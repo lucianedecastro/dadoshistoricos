@@ -104,9 +104,9 @@ document.addEventListener('DOMContentLoaded', () => {
             criarLinhasTabela(dadosFiltrados);
             tabelaContainer.style.display = 'block';
 
-            // Gera o gráfico apenas para a aba "detalhado"
-            if (dadosDetalhado.length > 0) {
-                gerarGrafico(dadosDetalhado);
+            // Gera o gráfico apenas para a aba "desempenho"
+            if (dadosDesempenho.length > 0) {
+                gerarGrafico(dadosDesempenho);
                 graficoContainer.style.display = 'block'; 
             } else {
                 graficoContainer.style.display = 'none'; // Esconde o gráfico
