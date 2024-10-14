@@ -3,35 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desempenho dos Técnicos da Seleção Feminina</title>
-    <link rel="stylesheet" href="style.css"> 
+    <title>Desempenho da Seleção Brasileira Feminina de Futebol</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Dados de desempenho da Seleção Brasileira Feminina de Futebol. Informações sobre jogos, resultados, técnicos e muito mais.">
+    <meta name="keywords" content="Futebol Feminino, Seleção Brasileira, Desempenho, Jogos, Resultados">
 </head>
 <body>
     <header>
-        <h1>Desempenho dos Técnicos da Seleção Feminina</h1> 
+        <div class="header-content">
+            <h1><span class="titulo-destaque">Seleção</span> Feminina ⚽</h1>
+            <p>Acesse os dados de desempenho da seleção feminina de futebol</p>
+        </div>
     </header>
-
-    <div id="filtros">
-        <label for="filtroAno">Ano:</label>
-        <select id="filtroAno">
-            <option value="">Selecione um Ano</option> 
-        </select>
-    </div>
-
-    <div id="conteudo-abas">
-        <div id="geral-conteudo" class="aba-conteudo">
-            <h2>Geral</h2>
-            <div id="tabelaGeral"></div>
-        </div>
-        <div id="desempenho-conteudo" class="aba-conteudo">
-            <h2>Desempenho</h2>
-            <div id="tabelaDesempenho"></div>
-        </div>
-        <div id="detalhado-conteudo" class="aba-conteudo">
-            <h2>Detalhado</h2>
-            <div id="tabelaDetalhado"></div>
-        </div>
-    </div>
-    <script src="script.js"></script> 
+    <main>
+        <section class="introducao">
+            <h2>Bem-vindos!</h2>
+            <p>Este site é dedicado a registrar e apresentar os dados de desempenho da Seleção Brasileira Feminina de Futebol ao longo da história. Aqui você encontrará informações sobre os jogos, resultados, técnicos e muito mais!</p>
+        </section>
+        <section class="estatisticas">
+            <h2>Pesquise aqui</h2>
+            <label for="filtroAno">Ano:</label>
+            <select id="filtroAno" aria-label="Filtro por Ano">
+                <option value="">Selecione o ano</option>
+            </select>
+            <label for="filtroCompeticao">Competição:</label>
+            <select id="filtroCompeticao" aria-label="Filtro por Competição">
+                <option value="">Selecione a competição</option>
+            </select>
+            <div id="tabela-container" style="display: none;"></div>
+            <div id="grafico-container" style="display: none;">
+                <canvas id="graficoDesempenho"></canvas>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Versão Beta</p>
+        <p>2024 - Todos os direitos reservados</p>
+        <p>Contato: <a href="mailto:luciane.castro@gmail.com">luciane.castro@gmail.com</a></p>
+    </footer>
+    <script src="dados.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
