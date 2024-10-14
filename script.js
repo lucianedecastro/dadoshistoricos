@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     const filtroAno = document.getElementById('filtroAno');
-    const filtroCompeticao = document.getElementById('filtroCompeticao');
     const tabelaContainer = document.getElementById('tabela-container');
     const graficoContainer = document.getElementById('grafico-container');
     const graficoCanvas = document.getElementById('graficoDesempenho');
@@ -14,31 +13,27 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 dadosSelecao = data;
                 preencherFiltros();
+                atualizarTabela();
             })
             .catch(error => console.error('Erro ao carregar dados:', error));
     }
 
     function preencherFiltros() {
         const anosUnicos = new Set(dadosSelecao.geral.map(item => item.Ano));
-        const competicoesUnicas = new Set(dadosSelecao.geral.map(item => item.Competição));
 
         anosUnicos.forEach(ano => {
-            filtroAno.innerHTML += `<option value="${ano}">${ano}</option>`;
-        });
-
-        competicoesUnicas.forEach(competicao => {
-            filtroCompeticao.innerHTML += `<option value="${competicao}">${competicao}</option>`;
+            const option = document.createElement('option');
+            option.value = ano;
+            option.textContent = ano;
+            filtroAno.appendChild(option);
         });
     }
 
     function filtrarDados(aba) {
         const anoSelecionado = parseInt(filtroAno.value, 10) || null;
-        const competicaoSelecionada = filtroCompeticao.value;
 
         return dadosSelecao[aba].filter(item => {
-            const atendeFiltroAno = !anoSelecionado || item.Ano === anoSelecionado;
-            const atendeFiltroCompeticao = !competicaoSelecionada || item.Competição === competicaoSelecionada;
-            return atendeFiltroAno && atendeFiltroCompeticao;
+            return !anoSelecionado || item.Ano === anoSelecionado;
         });
     }
 
@@ -95,3 +90,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+    }
+
+    function atualizarTabela() {
+        const dadosGeral = filtrarDados('geral');
+        const dadosDesempenho = filtrarDados('desempenho');
+        const dadosDetalhado = filtrarDados('detalhado').filter(item => item.Jogos !== 0);
+
+        const dadosFiltrados = [...dadosGeral, ...dadosDesempenho, ...dadosDetalhado];
+
+        if (dadosFiltrados.length > 0) {
+            criarCabecalhoTabela(Object.keys(dadosFiltrados[0] || {}));
+            criarLinhasTabela(dadosFiltrados);
+            tabelaContainer.style.display = 'block';
+
+            // Gera o gráfico apenas para a aba "detalhado"
+            if (dadosDetalhado.length > 0) {
+                gerarGrafico(dadosDetalhado);
+                graficoContainer.style.display = 'block'; 
+            } else {
+                graficoContainer.style.display = 'none'; // Esconde o gráfico
+            }
+        } else {
+            tabelaContainer.style.display = 'none'; // Esconde a tabela
+            graficoContainer.style.display = 'none'; // Esconde o gráfico
+        }
+    }
+
+    // Chama a função para carregar os dados quando a página carregar
+    carregarDados();
+
+    // Adiciona ouvintes de eventos aos filtros
+    filtroAno.addEventListener('change', atualizarTabela);
+});

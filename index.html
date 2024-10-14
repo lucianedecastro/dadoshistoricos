@@ -4,42 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desempenho da Seleção Brasileira Feminina de Futebol</title>
+    <script src="https://cdn.sheetjs.com/xlsx-0.18.12/xlsx.full.min.js"></script>
     <link rel="stylesheet" href="style.css">
-    <meta name="description" content="Dados de desempenho da Seleção Brasileira Feminina de Futebol. Informações sobre jogos, resultados, técnicos e muito mais.">
-    <meta name="keywords" content="Futebol Feminino, Seleção Brasileira, Desempenho, Jogos, Resultados">
-    <!-- Adiciona a biblioteca Chart.js para gráficos -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> </head>
 <body>
+
     <header>
         <div class="header-content">
             <h1><span class="titulo-destaque">Seleção</span> Feminina ⚽</h1>
             <p>Acesse os dados de desempenho da seleção feminina de futebol</p>
         </div>
     </header>
+
     <main>
         <section class="introducao">
             <h2>Bem-vindos!</h2>
             <p>Este site é dedicado a registrar e apresentar os dados de desempenho da Seleção Brasileira Feminina de Futebol ao longo da história. Aqui você encontrará informações sobre os jogos, resultados, técnicos e muito mais!</p>
         </section>
+        
         <section class="estatisticas">
-            <h2>Pesquise aqui</h2>
-            <label for="filtroAno">Ano:</label>
-            <select id="filtroAno" aria-label="Filtro por Ano">
-                <option value="">Selecione o ano</option>
-            </select>
-            <div id="tabela-container" style="display: none;"></div>
-            <div id="grafico-container" style="display: none;">
+            <h2>Estatísticas Gerais</h2>
+            <p>Em 2017, me debrucei sobre os arquivos da FIFA e sobre outras fontes para buscar os resultados obtidos
+                pelos técnicos que passaram pela seleção feminina de futebol. 
+                Este site, ainda em sua versão beta, traz os dados colhidos desde 1991.</p>
+            <p>Pesquise aqui</p>
+
+            <!-- Filtros -->
+            <label for="filtroAno"></label>
+            <select id="filtroAno"></select>
+            <div id="tabela-container"></div>
+            <div id="grafico-container">
                 <canvas id="graficoDesempenho"></canvas>
             </div>
         </section>
+        
     </main>
-    <footer>
-        <p>Versão Beta</p>
+
+    <footer> 
+        <p>Versão Beta</p> 
+        <p>Desenvolvido por Luciane de Castro</p>
         <p>2024 - Todos os direitos reservados</p>
         <p>Contato: <a href="mailto:luciane.castro@gmail.com">luciane.castro@gmail.com</a></p>
     </footer>
-    <script src="dados.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
