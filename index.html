@@ -3,45 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desempenho da Seleção Brasileira Feminina de Futebol</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="description" content="Dados de desempenho da Seleção Brasileira Feminina de Futebol. Informações sobre jogos, resultados, técnicos e muito mais.">
-    <meta name="keywords" content="Futebol Feminino, Seleção Brasileira, Desempenho, Jogos, Resultados">
-    <!-- Adiciona a biblioteca Chart.js para gráficos -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Seleção Feminina ⚽</title>
+    <link rel="stylesheet" href="style.css"> <!-- Supondo que você tenha um CSS -->
 </head>
 <body>
     <header>
         <div class="header-content">
-            <a href="/" class="banner" onclick="atualizarTabela();">
+            <a href="/" id="botao-home">
                 <h1><span class="titulo-destaque">Seleção</span> Feminina ⚽</h1>
                 <p>Acesse os dados de desempenho da seleção feminina de futebol</p>
             </a>
-            <div class="beta-indicator">Versão Beta</div>
         </div>
     </header>
+
     <main>
-        <section class="introducao">
-            <h2>Bem-vindos!</h2>
-            <p>Este site é dedicado a registrar e apresentar os dados de desempenho da Seleção Brasileira Feminina de Futebol ao longo da história. Aqui você encontrará informações sobre os jogos, resultados, técnicos e muito mais!</p>
-        </section>
-        <section class="estatisticas">
-            <h2>Pesquise aqui</h2>
-            <label for="filtroAno">Ano:</label>
-            <select id="filtroAno" aria-label="Filtro por Ano">
-                <option value="">Selecione o ano</option>
+        <section class="filtros">
+            <!-- Filtro de anos -->
+            <label for="filtroAno">Filtrar por ano:</label>
+            <select id="filtroAno">
+                <!-- Adicionando a opção 'vazio' por padrão -->
+                <option value="" selected>Selecione um ano</option>
+                <!-- As outras opções serão populadas dinamicamente pelo JavaScript -->
             </select>
-            <div id="tabela-container" style="display: none;"></div>
-            <div id="grafico-container" style="display: none;">
-                <canvas id="graficoDesempenho"></canvas>
-            </div>
+        </section>
+
+        <section id="tabela-container">
+            <!-- A tabela de dados será inserida dinamicamente pelo JavaScript -->
+        </section>
+
+        <section id="grafico-container">
+            <!-- O canvas para o gráfico de desempenho -->
+            <canvas id="graficoDesempenho"></canvas>
         </section>
     </main>
+
     <footer>
-        <p>2024 - Todos os direitos reservados</p>
-        <p>Contato: <a href="mailto:luciane.castro@gmail.com">luciane.castro@gmail.com</a></p>
+        <p>&copy; 2024 Seleção Feminina de Futebol. Todos os direitos reservados.</p>
+        <p>Contato: luciane.castro@gmail.com</p>
     </footer>
-    <!-- Carregando o script.js normalmente -->
+
+    <!-- Incluímos o script no final da página para garantir que os elementos do DOM estejam carregados -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
