@@ -4,45 +4,38 @@ import json
 app = Flask(__name__)
 
 # Habilita o serviço de arquivos estáticos
-app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0  # Desabilita o cache
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0  # Desabilita o cache durante o desenvolvimento
 app.static_folder = 'static'
-app.config['APPLICATION_ROOT'] = '/data-coach' # Define a URL base da aplicação
+app.config['APPLICATION_ROOT'] = '/data-coach'  # Define a URL base da aplicação
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
-@app.route("/anos")
-def get_anos():
-    with open('dados.json', 'r') as f:
-        data = json.load(f)
-    anos = sorted(set([item["Ano"] for item in data["geral"]]))
-    return jsonify(anos) 
-
+# Carrega todos os dados do JSON para o frontend
 @app.route('/dados.json')
 def get_dados_json():
     with open('dados.json', 'r') as f:
         data = json.load(f)
-    return jsonify(data) # Retorna os dados como JSON
+    return jsonify(data)
 
-@app.route('/filtrar_dados/<int:ano>/<string:competicao>')
-def filtrar_dados(ano, competicao):
+# Filtra os dados por ano e retorna o filtro de geral e desempenho
+@app.route('/filtrar_dados/<int:ano>')
+def filtrar_dados(ano):
     with open('dados.json', 'r') as f:
         data = json.load(f)
 
-    # Filtrar dados
-    geral = data["geral"]
-    desempenho = data["desempenho"]
-    detalhado = data["detalhado"]
+    # Filtra os dados de "geral" e "desempenho" com base no ano selecionado
+    geral = [item for item in data["geral"] if item["Ano"] == ano]
+    desempenho = [item for item in data["desempenho"] if item["Ano_1"] == ano]
 
-    # Filtra a aba "geral"
-    geral = [item for item in geral if item["Ano"] == ano and (competicao == "" or item["Competição"] == competicao)]
-    
-    # Filtra as outras abas (desempenho e detalhado)
-    # ... (adicionar filtros para as outras abas, se necessário)
+    # Retorna os dados filtrados
+    return jsonify({
+        "geral": geral,
+        "desempenho": desempenho
+    })
 
-    return jsonify({"geral": geral, "desempenho": desempenho, "detalhado": detalhado})
-
+# Rota para servir arquivos estáticos
 @app.route('/static/<path:filename>')
 def serve_static(filename):
     return send_from_directory(app.static_folder, filename)

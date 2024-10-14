@@ -9,9 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para carregar os dados do arquivo JSON
     function carregarDados() {
         fetch('dados.json')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao carregar dados.json');
+                }
+                return response.json();
+            })
             .then(data => {
                 dadosSelecao = data;
+                console.log('Dados carregados:', dadosSelecao); // Verifique os dados carregados
                 preencherFiltros();
                 atualizarTabela();
             })
@@ -19,18 +25,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function preencherFiltros() {
+        filtroAno.innerHTML = ''; // Limpa o filtro antes de preenchê-lo
         const anosUnicos = new Set(dadosSelecao.geral.map(item => item.Ano));
 
+        // Adiciona opções ao filtro de ano
         anosUnicos.forEach(ano => {
             const option = document.createElement('option');
             option.value = ano;
             option.textContent = ano;
             filtroAno.appendChild(option);
         });
+
+        console.log('Anos disponíveis:', Array.from(anosUnicos)); // Verifique os anos disponíveis
     }
 
     function filtrarDados(aba) {
-        const anoSelecionado = parseInt(filtroAno.value, 10) || null;
+        const anoSelecionado = filtroAno.value;
 
         return dadosSelecao[aba].filter(item => {
             return !anoSelecionado || item.Ano === anoSelecionado;
@@ -45,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             th.textContent = coluna;
             cabecalho.appendChild(th);
         });
-        tabelaContainer.innerHTML = ''; 
+        tabelaContainer.innerHTML = '';
         tabelaContainer.appendChild(tabela);
     }
 
@@ -54,21 +64,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const corpoTabela = tabela.createTBody();
         dados.forEach(item => {
             const novaLinha = corpoTabela.insertRow();
-            Object.values(item).forEach(valor => {
+            [item.Ano, item.Competição, item.Resultado, item.Técnico, item["Seleções adversárias"]].forEach(valor => {
                 const novaCelula = novaLinha.insertCell();
                 novaCelula.textContent = valor;
             });
         });
     }
 
-    // Função para gerar o gráfico de barras
     function gerarGrafico(dados) {
         if (meuGrafico) {
             meuGrafico.destroy(); // Destrói o gráfico anterior, se existir
         }
 
-        const labels = dados.map(item => item.Ano); // Rótulos do eixo X (anos)
-        const data = dados.map(item => item.Jogos); // Valores do eixo Y (jogos)
+        const labels = dados.map(item => item.Ano_1); // Rótulos do eixo X (anos)
+        const data = dados.map(item => item.Jogos); // Corrigido o acesso à coluna Jogos
 
         meuGrafico = new Chart(graficoCanvas, {
             type: 'bar',
@@ -93,27 +102,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function atualizarTabela() {
+        const anoSelecionado = filtroAno.value;
+
         const dadosGeral = filtrarDados('geral');
         const dadosDesempenho = filtrarDados('desempenho');
-        const dadosDetalhado = filtrarDados('detalhado').filter(item => item.Jogos !== 0);
 
-        const dadosFiltrados = [...dadosGeral, ...dadosDesempenho, ...dadosDetalhado];
+        // Adiciona cabeçalho à tabela com os nomes das colunas corretas
+        criarCabecalhoTabela(Object.keys(dadosGeral[0] || {}));
 
-        if (dadosFiltrados.length > 0) {
-            criarCabecalhoTabela(Object.keys(dadosFiltrados[0] || {}));
-            criarLinhasTabela(dadosFiltrados);
+        // Mostra a tabela geral
+        if (dadosGeral.length > 0) {
+            criarLinhasTabela(dadosGeral);
             tabelaContainer.style.display = 'block';
-
-            // Gera o gráfico apenas para a aba "desempenho"
-            if (dadosDesempenho.length > 0) {
-                gerarGrafico(dadosDesempenho);
-                graficoContainer.style.display = 'block'; 
-            } else {
-                graficoContainer.style.display = 'none'; // Esconde o gráfico
-            }
         } else {
-            tabelaContainer.style.display = 'none'; // Esconde a tabela
-            graficoContainer.style.display = 'none'; // Esconde o gráfico
+            tabelaContainer.style.display = 'none';
+        }
+
+        // Gera o gráfico de desempenho
+        if (dadosDesempenho.length > 0) {
+            gerarGrafico(dadosDesempenho);
+            graficoContainer.style.display = 'block';
+        } else {
+            graficoContainer.style.display = 'none';
         }
     }
 
