@@ -55,27 +55,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function criarLinhasTabela(dados) {
-        const corpoTabela = document.querySelector('#tabela-container table tbody');
-        if (!corpoTabela) {
-            const tabela = document.querySelector('#tabela-container table');
-            const novoCorpo = tabela.createTBody();
-            dados.forEach(item => {
-                const novaLinha = novoCorpo.insertRow();
-                Object.values(item).forEach(valor => {
-                    const novaCelula = novaLinha.insertCell();
-                    novaCelula.textContent = valor;
-                });
+        const tabela = document.querySelector('#tabela-container table');
+        const corpoTabela = tabela.createTBody();
+        dados.forEach(item => {
+            const novaLinha = corpoTabela.insertRow();
+            Object.values(item).forEach(valor => {
+                const novaCelula = novaLinha.insertCell();
+                novaCelula.textContent = valor;
             });
-        } else {
-            corpoTabela.innerHTML = ''; 
-            dados.forEach(item => {
-                const novaLinha = corpoTabela.insertRow();
-                Object.values(item).forEach(valor => {
-                    const novaCelula = novaLinha.insertCell();
-                    novaCelula.textContent = valor;
-                });
-            });
-        }
+        });
     }
 
     // Função para gerar o gráfico de barras
