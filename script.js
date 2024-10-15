@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const filtroAno = document.getElementById('filtroAno');
     const tabelaContainer = document.getElementById('tabela-container');
+    const desempenhoTabelaContainer = document.getElementById('desempenho-tabela-container'); // Nova tabela para o desempenho
     const graficoContainer = document.getElementById('grafico-container');
     const graficoCanvas = document.getElementById('graficoDesempenho');
     let meuGrafico = null; // Variável para armazenar o gráfico
@@ -38,13 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Função para atualizar a tabela com base no ano selecionado
-    function atualizarTabela() {
+    // Função para atualizar a tabela "geral" com base no ano selecionado
+    function atualizarTabelaGeral() {
         const anoSelecionado = filtroAno.value;
         tabelaContainer.innerHTML = ''; // Limpa o conteúdo atual
 
         if (anoSelecionado === '') {
-            // Exibe mensagem se nenhum ano for selecionado
             tabelaContainer.innerHTML = '<p>Por favor, selecione um ano para ver os dados.</p>';
             return;
         }
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Cria a tabela
+        // Cria a tabela "geral"
         const tabela = document.createElement('table');
         const thead = document.createElement('thead');
         const tbody = document.createElement('tbody');
@@ -88,6 +88,60 @@ document.addEventListener('DOMContentLoaded', () => {
         tabelaContainer.appendChild(tabela);
     }
 
+    // Função para atualizar a tabela "desempenho"
+    function atualizarTabelaDesempenho() {
+        const anoSelecionado = filtroAno.value;
+        desempenhoTabelaContainer.innerHTML = ''; // Limpa o conteúdo da tabela de desempenho
+
+        if (anoSelecionado === '') {
+            desempenhoTabelaContainer.innerHTML = '<p>Por favor, selecione um ano para ver o desempenho.</p>';
+            return;
+        }
+
+        // Filtra os dados de desempenho verificando múltiplos campos de ano
+        const dadosDesempenhoFiltrados = dadosSelecao.desempenho.filter(entry => 
+            entry.Ano_1 == anoSelecionado || 
+            entry.Ano_2 == anoSelecionado || 
+            entry.Ano_3 == anoSelecionado || 
+            entry.Ano_4 == anoSelecionado
+        );
+
+        if (dadosDesempenhoFiltrados.length === 0) {
+            desempenhoTabelaContainer.innerHTML = '<p>Nenhum dado de desempenho disponível para o ano selecionado.</p>';
+            return;
+        }
+
+        // Cria a tabela "desempenho"
+        const tabela = document.createElement('table');
+        const thead = document.createElement('thead');
+        const tbody = document.createElement('tbody');
+
+        // Cabeçalhos da tabela de desempenho
+        const headers = ['Técnico', 'Vitórias', 'Derrotas', 'Empates', 'Adversárias', 'Top5'];
+        const trHead = document.createElement('tr');
+        headers.forEach(headerText => {
+            const th = document.createElement('th');
+            th.textContent = headerText;
+            trHead.appendChild(th);
+        });
+        thead.appendChild(trHead);
+        tabela.appendChild(thead);
+
+        // Linhas da tabela de desempenho
+        dadosDesempenhoFiltrados.forEach(entry => {
+            const tr = document.createElement('tr');
+            headers.forEach(header => {
+                const td = document.createElement('td');
+                td.textContent = entry[header];
+                tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+        });
+
+        tabela.appendChild(tbody);
+        desempenhoTabelaContainer.appendChild(tabela);
+    }
+
     // Função para atualizar o gráfico de desempenho
     function atualizarGrafico() {
         const anoSelecionado = filtroAno.value;
@@ -106,11 +160,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Prepara os dados para o gráfico
-        const labels = ['Vitórias', 'Derrotas', 'Empates'];
+        const labels = ['Vitórias', 'Derrotas', 'Empates', 'Adversárias', 'Top5'];
+        const desempenho = dadosDesempenhoFiltrados[0]; // Assumindo que há apenas um técnico por ano
+
         const dadosGrafico = [
-            dadosDesempenhoFiltrados[0].Vitórias,
-            dadosDesempenhoFiltrados[0].Derrotas,
-            dadosDesempenhoFiltrados[0].Empates
+            parseInt(desempenho.Vitórias),
+            parseInt(desempenho.Derrotas),
+            parseInt(desempenho.Empates),
+            parseInt(desempenho.Adversárias), // Coluna Adversárias
+            parseInt(desempenho.Top5) // Coluna Top 5
         ];
 
         // Destruir o gráfico anterior, se houver
@@ -126,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 datasets: [{
                     label: `Desempenho em ${anoSelecionado}`,
                     data: dadosGrafico,
-                    backgroundColor: ['green', 'red', 'blue'],
+                    backgroundColor: ['green', 'red', 'blue', 'purple', 'orange'],
                 }]
             },
             options: {
@@ -146,14 +204,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event listeners
     filtroAno.addEventListener('change', () => {
-        atualizarTabela();
-        atualizarGrafico(); // Adicionando a chamada para atualizar o gráfico
+        atualizarTabelaGeral(); // Atualiza a tabela "geral"
+        atualizarTabelaDesempenho(); // Atualiza a tabela "desempenho"
+        atualizarGrafico(); // Atualiza o gráfico
     });
 
     // Função para resetar a página ao clicar no header
     function resetarPagina() {
         filtroAno.value = ''; // Reseta o filtro de ano
-        tabelaContainer.innerHTML = ''; // Limpa a tabela
+        tabelaContainer.innerHTML = ''; // Limpa a tabela "geral"
+        desempenhoTabelaContainer.innerHTML = ''; // Limpa a tabela "desempenho"
         if (meuGrafico) {
             meuGrafico.destroy(); // Destrói o gráfico, se existir
         }
