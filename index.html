@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seleção Feminina ⚽</title>
-    <link rel="stylesheet" href="style.css"> <!-- Supondo que você tenha um CSS -->
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
     <div class="beta-indicator">Versão Beta</div>
     <header>
         <div class="header-content">
             <a href="/" id="botao-home">
-                <h1><span class="titulo-destaque">Seleção</span> Feminina ⚽</h1>
+                <h1><span class="titulo-destaque">Dados da Seleção</span> Feminina ⚽</h1>
                 <p>Acesse os dados de desempenho da seleção feminina de futebol</p>
             </a>
         </div>
@@ -19,31 +20,32 @@
 
     <main>
         <section class="filtros">
-            <!-- Filtro de anos -->
+            
             <label for="filtroAno">Filtrar por ano:</label>
             <select id="filtroAno">
-                <!-- Adicionando a opção 'vazio' por padrão -->
+                
                 <option value="" selected>Selecione um ano</option>
-                <!-- As outras opções serão populadas dinamicamente pelo JavaScript -->
+                
             </select>
         </section>
 
         <section id="tabela-container">
-            <!-- A tabela de dados será inserida dinamicamente pelo JavaScript -->
+            
         </section>
 
         <section id="grafico-container">
-            <!-- O canvas para o gráfico de desempenho -->
+            
             <canvas id="graficoDesempenho"></canvas>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Seleção Feminina de Futebol. Todos os direitos reservados.</p>
-        <p>Contato: luciane.castro@gmail.com</p>
+        <p>&copy; 2024 Dados de Desempenho da Seleção Feminina de Futebol</p>
+        <p>Todos os direitos reservados</p>
+        <p>Contato: <a href="mailto:luciane.castro@gmail.com">luciane.castro@gmail.com</a></p>
     </footer>
 
-    <!-- Incluímos o script no final da página para garantir que os elementos do DOM estejam carregados -->
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
